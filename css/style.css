@@ -1,0 +1,58 @@
+
+body {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 5rem;
+}
+
+p::before {
+  content: '';
+  background: red;
+  display: block;
+  position: absolute;
+
+  /* top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0; */
+
+  width: 200px;
+  height: 20px;
+}
+
+p::after {
+  content: '';
+  background: red;
+  display: block;
+  position: absolute;
+
+  /* top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0; */
+
+  width: 200px;
+  height: 20px;
+}
+
+/*  
+  NOTE:__
+  Before and After pseudo elements do not work with img element
+  this is because these pseudo elements need the Content property 
+  in order to work properly but incase of img element the image
+  itself is the content and images are sometimes called replacing
+  elements so it will not allow other content to replece it as the
+  images source is the content so they behave differently, so it
+  will not work.
+*/
+
+img::before {
+  content: '';
+  display: block;
+  position: absolute;
+  width: 1000px;
+  height: 100px;
+  background: purple;
+}
