@@ -1,0 +1,12 @@
+
+
+.bottom-line::after {
+  content: '';
+  background: #c31;
+  display: block;
+  margin: 1.5rem auto 0 auto;
+  height: 2px;
+  width: 30rem;
+  position: relative;
+}
+
