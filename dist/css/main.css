@@ -8,20 +8,46 @@
   width: 30rem;
   position: relative; }
 
+*,
+*::before,
+*::after {
+  box-sizing: border-box; }
+
 body {
   font-size: 1rem;
   text-align: center;
   font-family: "Vollkorn";
   line-height: 1.4;
   color: rgba(0, 0, 0, 0.7);
-  max-width: 1200px;
-  margin: 0 auto 0 auto; }
+  margin: 0 auto; }
 
 h1, h2, h3, h4, h5 {
   font-family: "Unica One";
   text-transform: uppercase;
   line-height: 0.9;
   color: #c31; }
+
+.intro {
+  position: relative;
+  display: inline-block; }
+  .intro::before, .intro::after {
+    content: '';
+    display: block;
+    position: absolute; }
+  .intro::before {
+    background: white;
+    height: 101%;
+    z-index: -1;
+    left: -20px;
+    right: -20px; }
+  .intro::after {
+    background: #c31;
+    width: 100vw;
+    left: 50%;
+    top: 0;
+    transform: translateX(-50%);
+    z-index: -2;
+    height: 100%; }
 
 h2 {
   margin-top: 1.2em;
@@ -34,57 +60,76 @@ a {
   color: #c31; }
 
 .intro {
-  font-size: 5rem; }
+  font-size: 4rem; }
 
 blockquote {
   font-size: 2rem;
   color: black; }
+  blockquote::before {
+    content: open-quote;
+    font-size: 1.5em;
+    color: #c31; }
+  blockquote::after {
+    content: close-quote;
+    font-size: 1.5em;
+    color: #c31; }
 
-blockquote::before {
-  content: open-quote;
-  font-size: 1.5em;
-  color: #c31; }
+.container {
+  width: 80%;
+  margin: 0 auto;
+  display: flex;
+  justify-content: center; }
 
-blockquote::after {
-  content: close-quote;
-  font-size: 1.5em;
-  color: #c31; }
+.card {
+  position: relative;
+  margin: 1em;
+  background: rgba(0, 0, 0, 0.7); }
+  .card::before, .card::after {
+    content: '';
+    position: absolute;
+    top: 1.25em;
+    bottom: 1.25em;
+    left: 1.25em;
+    right: 1.25em; }
+  .card::before {
+    transform: scale(0, 1);
+    transition: transform ease-out 250ms;
+    border-top: 1px solid white;
+    border-bottom: 1px solid white; }
+  .card::after {
+    transform: scale(1, 0);
+    transition: transform ease-out 250ms;
+    border-right: 1px solid white;
+    border-left: 1px solid white; }
+  .card:hover::before {
+    transform: scale(1.05, 1); }
+  .card:hover::after {
+    transform: scale(1, 1.05); }
 
-a[data-tool-tip] {
-  position: relative; }
-
-a[data-tool-tip]::after {
-  content: attr(data-tool-tip);
+.card-img {
+  max-width: 100%;
   display: block;
+  transition: opacity ease-out 250ms; }
+
+.card:hover .card-img {
+  opacity: 0.4; }
+
+.card-text {
   position: absolute;
-  background-color: rgba(0, 0, 0, 0.7);
-  padding: 1em 3em;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
   color: white;
-  border-radius: 5px;
-  font-size: 0.8em;
-  bottom: 0;
-  left: 0;
-  white-space: nowrap;
-  transform: scale(0);
-  transition: transform ease-out 150ms,  bottom ease-out 150ms; }
+  opacity: 0;
+  transition: opacity ease-out 250ms; }
 
-a[data-tool-tip]:hover::after {
-  transform: scale(1);
-  bottom: 100%; }
+.card:hover .card-text {
+  opacity: 1; }
 
-.decorations {
-  padding: 3em; }
-
-.section-with-deco::before {
-  font-family: 'Font Awesome 5 Free';
-  font-weight: 900;
-  content: '\f0e7';
-  display: block;
-  margin-bottom: 5px; }
-
-a[href$=".pdf"]::after {
-  font-family: 'Font Awesome 5 Free';
-  content: '\f1c1'; }
+.card-title {
+  font-size: 2rem;
+  color: white;
+  margin-bottom: 0; }
 
 a[href^="http"]::after {
   font-family: 'Font Awesome 5 Free';
@@ -93,50 +138,10 @@ a[href^="http"]::after {
   font-size: 0.8em;
   margin-left: 0.2rem; }
 
-.counters {
-  background: lightgray;
-  text-align: left;
-  padding: 5em 8em;
-  margin-top: 7em;
-  /*
-    CSS Syntax
-    counter-reset: none|name number|initial|inherit;
-  */
-  /* Set "counter-name" to 0 */
-  counter-reset: counter-name; }
-
-.section {
-  position: relative; }
-
-.section::before {
-  /* Increment "counter-name" by 1 */
-  counter-increment: counter-name;
-  content: counter(counter-name);
+.source {
+  opacity: 0.8;
   position: absolute;
-  left: -2.5em;
-  top: -0.5em;
-  background: white;
-  width: 2em;
-  height: 2em;
-  border-radius: 50%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  border: 3px solid rgba(0, 0, 0, 0.7);
-  color: rgba(0, 0, 0, 0.7);
-  box-sizing: border-box; }
-
-.counters ol {
-  list-style: none;
-  counter-reset: ordered-list; }
-
-.counters li::before {
-  /* 
-    everytime we get to one of the list items 'li' of the parent 'ol', 'ol' which is the parent has the 'counter-reset' property in which we reset ordered list, and 'li' which is the child has the counter-increment property in which we increment the ordered-list which we have set as our counter-reset. So, everytime we get on of these list items we increasing the increment and in the next line we adding content to it through the 'content' property to each list item. 
-  */
-  counter-increment: ordered-list;
-  content: "list item " counter(ordered-list,upper-roman) ") ";
-  font-size: 0.8em;
-  color: #c31; }
+  width: 100%;
+  bottom: 1em; }
 
 /*# sourceMappingURL=main.css.map */
