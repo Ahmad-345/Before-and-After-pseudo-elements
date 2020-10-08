@@ -1,4 +1,78 @@
+@charset "UTF-8";
 @import url("https://fonts.googleapis.com/css2?family=Unica+One&family=Vollkorn&display=swap");
+.lists-container {
+  background: lightgray;
+  text-align: left;
+  padding: 5em 8em; }
+
+.ordered-list {
+  list-style: none;
+  background: darkgray;
+  padding: 1rem;
+  border-radius: 5px;
+  counter-reset: ordered-list; }
+
+.ordered-list li {
+  position: relative;
+  margin-left: 4rem;
+  margin-bottom: 0.39rem; }
+
+.ordered-list li::before, .first-ol li::before {
+  position: absolute;
+  left: -4rem;
+  top: -0.05rem;
+  width: 3.5rem;
+  height: 2em;
+  line-height: 2em;
+  background: white;
+  border-radius: 5px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  border: 2px solid rgba(0, 0, 0, 0.7);
+  color: #000;
+  box-sizing: border-box;
+  font-size: 0.8rem; }
+
+.ordered-list li::before {
+  counter-increment: ordered-list;
+  content: "No. " counter(ordered-list) ") "; }
+
+.first-ol,
+.second-ol,
+.third-ol {
+  padding: 1rem;
+  border-radius: 5px;
+  list-style: none;
+  line-height: 2;
+  position: relative; }
+
+.first-ol {
+  background: steelblue;
+  counter-reset: firstList; }
+  .first-ol li {
+    position: relative;
+    margin-left: 4rem;
+    margin-bottom: 0.39rem; }
+  .first-ol li::before {
+    counter-increment: firstList;
+    content: counter(firstList) ") "; }
+  .first-ol .second-ol {
+    background: skyblue;
+    margin-bottom: 1rem;
+    counter-reset: secondList; }
+    .first-ol .second-ol li::before {
+      counter-increment: secondList;
+      content: counter(firstList) "." counter(secondList) ") "; }
+    .first-ol .second-ol .third-ol {
+      background: lightblue;
+      margin-bottom: 1rem;
+      counter-reset: thirdList; }
+      .first-ol .second-ol .third-ol li::before {
+        counter-increment: thirdList;
+        content: counter(firstList) "." counter(secondList) "." counter(thirdList) ") "; }
+
 .bottom-line::after {
   content: '';
   background: #c31;
@@ -19,7 +93,8 @@ body {
   font-family: "Vollkorn";
   line-height: 1.4;
   color: rgba(0, 0, 0, 0.7);
-  margin: 0 auto; }
+  margin: 0 auto;
+  background: #f4f4f4; }
 
 h1, h2, h3, h4, h5 {
   font-family: "Unica One";
@@ -35,7 +110,7 @@ h1, h2, h3, h4, h5 {
     display: block;
     position: absolute; }
   .intro::before {
-    background: white;
+    background: #f4f4f4;
     height: 101%;
     z-index: -1;
     left: -20px;
@@ -140,8 +215,83 @@ a[href^="http"]::after {
 
 .source {
   opacity: 0.8;
-  position: absolute;
+  position: relative;
   width: 100%;
-  bottom: 1em; }
+  top: 1em; }
+
+.counters {
+  background: lightgray;
+  text-align: left;
+  padding: 5em 8em;
+  margin-top: 5em;
+  margin-bottom: 5em;
+  counter-reset: number-counter; }
+
+.section {
+  position: relative;
+  counter-reset: nested-counter;
+  counter-increment: number-counter; }
+
+.section::before {
+  content: counter(number-counter);
+  position: absolute;
+  left: -2.5em;
+  top: -0.5em;
+  background: white;
+  width: 2em;
+  height: 2em;
+  line-height: 2em;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 3px solid rgba(0, 0, 0, 0.7);
+  color: #c31;
+  box-sizing: border-box; }
+
+.sub-section {
+  position: relative;
+  left: 2em;
+  line-height: 1.2;
+  margin-left: 1rem; }
+
+.sub-section::before {
+  counter-increment: nested-counter;
+  content: counter(number-counter) "." counter(nested-counter);
+  position: absolute;
+  left: -3.5em;
+  top: -0.5em;
+  background: rgba(0, 0, 0, 0.7);
+  width: 1.2em;
+  height: 1.2em;
+  line-height: 1.5em;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 2px solid #c31;
+  color: #fff;
+  box-sizing: border-box;
+  font-size: 0.8rem;
+  padding: 1rem; }
+
+/* 
+  * Which reminds me: the numbers don’t have to be decimals. They can be anything that 
+  * list-style-type can be. Namely:
+  * disc (• • •)
+  * circle (○ ○ ○)
+  * square (▪ ▪ ▪)
+  * decimal (1 2 3)
+  * decimal-leading-zero (01, 02, 03)
+  * lower-roman (i ii iii)
+  * upper-roman (I II III)
+  * lower-greek (α β γ)
+  * lower-latin (a b c)
+  * upper-latin (A B C)
+  * armenian (Ա Բ Գ)
+  * georgian (ა ბ გ)
+  * lower-alpha (a b c)
+  * upper-alpha (A B C)
+*/
 
 /*# sourceMappingURL=main.css.map */

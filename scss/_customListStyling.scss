@@ -1,0 +1,102 @@
+
+
+.lists-container {
+  background: lightgray;
+  text-align: left;
+  padding: 5em 8em;
+}
+
+.ordered-list {
+  list-style: none;
+  background: darkgray;
+  padding: 1rem;
+  border-radius: 5px;
+
+  counter-reset: ordered-list;
+}
+
+.ordered-list li {
+  position: relative;
+  margin-left: 4rem;
+  margin-bottom: 0.39rem;
+}
+
+%shared-List-Item-Bullet-Style {
+  position: absolute;
+  left: -4rem;
+  top: -0.05rem;
+  width: 3.5rem;
+  height: 2em;
+  line-height: 2em;
+  background: white;
+  border-radius: 5px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  border: 2px solid $clr-gray;
+  color: #000;
+  box-sizing: border-box;
+  font-size: 0.8rem;
+}
+
+.ordered-list li::before {
+  @extend %shared-List-Item-Bullet-Style;
+
+  counter-increment: ordered-list;
+  content: "No. " counter(ordered-list) ") ";
+}
+
+
+.first-ol,
+.second-ol, 
+.third-ol {
+  padding: 1rem;
+  border-radius: 5px;
+  list-style: none;
+  line-height: 2;
+  position: relative;
+}
+
+
+.first-ol {
+  background: steelblue;  
+  counter-reset: firstList;
+
+  & li {
+    position: relative;
+    margin-left: 4rem;
+    margin-bottom: 0.39rem;
+  }
+  
+  & li::before {
+    @extend %shared-List-Item-Bullet-Style;
+
+    counter-increment: firstList; 
+    content: counter(firstList) ") "; 
+  }
+
+  .second-ol {
+    background: skyblue;  
+    margin-bottom: 1rem;
+    counter-reset: secondList; 
+    
+    & li::before {
+      counter-increment: secondList; 
+      content: counter(firstList) "." counter(secondList) ") ";
+    }
+    
+    .third-ol {
+      background: lightblue;
+      margin-bottom: 1rem;
+      counter-reset: thirdList;
+    
+      & li::before {
+        counter-increment: thirdList;
+        content: counter(firstList) "." counter(secondList) "." counter(thirdList) ') ';
+      }
+    }
+  }
+}
+
+

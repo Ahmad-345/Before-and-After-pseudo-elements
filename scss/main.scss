@@ -1,14 +1,8 @@
-
+@import 'config';
+@import 'customListStyling';
 @import 'utility';
 
 @import url('https://fonts.googleapis.com/css2?family=Unica+One&family=Vollkorn&display=swap');
-
-$ff-ss: 'Unica One';
-$ff-s: 'Vollkorn';
-
-$clr-red: #c31;
-$clr-black: rgba(black, 1);
-$clr-gray: rgba(black, 0.7);
 
 *, 
 *::before, 
@@ -23,6 +17,7 @@ body {
   line-height: 1.4;
   color: $clr-gray;
   margin: 0 auto;
+  background: #f4f4f4;
 }
 
 h1, h2, h3, h4, h5 {
@@ -44,7 +39,7 @@ h1, h2, h3, h4, h5 {
   }
   
   &::before {
-    background: white;
+    background: #f4f4f4;
     height: 101%;
     // width: 100%;
     z-index: -1;    
@@ -188,7 +183,90 @@ a[href^="http"]::after {
 
 .source {
   opacity: 0.8;
-  position: absolute;
+  position: relative;
   width: 100%;
-  bottom: 1em;
+  top: 1em;
 }
+
+.counters {
+  background: lightgray;
+  text-align: left;
+  padding: 5em 8em;
+  margin-top: 5em;
+  margin-bottom: 5em;
+
+  counter-reset: number-counter;
+}
+
+.section {
+  position: relative;
+
+  counter-reset: nested-counter;
+  counter-increment: number-counter;
+}
+
+.section::before {
+  content: counter(number-counter);
+  position: absolute;
+  left: -2.5em;
+  top: -0.5em;
+  background: white;
+  width: 2em;
+  height: 2em;
+  line-height: 2em;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 3px solid $clr-gray;
+  color: $clr-red;
+  box-sizing: border-box;
+}
+
+.sub-section {
+  position: relative;
+  left: 2em;
+  line-height: 1.2;
+  margin-left: 1rem;
+}
+
+.sub-section::before  {
+  counter-increment: nested-counter;
+  content: counter(number-counter) "." counter(nested-counter);
+  position: absolute;
+  left: -3.5em;
+  top: -0.5em;
+  background: $clr-gray;
+  width: 1.2em;
+  height: 1.2em;
+  line-height: 1.5em;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 2px solid $clr-red;
+  color: #fff;
+  box-sizing: border-box;
+  font-size: 0.8rem;
+  padding: 1rem;
+}
+
+
+/* 
+  * Which reminds me: the numbers don’t have to be decimals. They can be anything that 
+  * list-style-type can be. Namely:
+  * disc (• • •)
+  * circle (○ ○ ○)
+  * square (▪ ▪ ▪)
+  * decimal (1 2 3)
+  * decimal-leading-zero (01, 02, 03)
+  * lower-roman (i ii iii)
+  * upper-roman (I II III)
+  * lower-greek (α β γ)
+  * lower-latin (a b c)
+  * upper-latin (A B C)
+  * armenian (Ա Բ Գ)
+  * georgian (ა ბ გ)
+  * lower-alpha (a b c)
+  * upper-alpha (A B C)
+*/
